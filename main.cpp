@@ -54,6 +54,10 @@ void get_value	 (void);
 SDL_Window   	*Window	  = NULL;
 SDL_Renderer 	*Renderer = NULL;
 
+#ifdef main
+#undef main
+#endif
+
 int main()
 {
 	Window = createWindow();
