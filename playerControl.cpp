@@ -11,7 +11,7 @@ void playerControl::init()
 
 	assets_in();
 
-	SDL_SetWindowPosition(Window, 0, 0);
+	SDL_SetWindowPosition(Window, 50, 50);
 	SDL_SetWindowSize(Window, ww, wh);
 	SDL_SetWindowTitle(Window, "SDL2 Slider");
 	SDL_ShowWindow(Window);
@@ -114,7 +114,7 @@ void playerControl::start()
 void playerControl::stop()
 {
 	assets_out();
-	exit_(Window, Renderer);
+	destroy(Window, Renderer);
 }
 
 void playerControl::assets_in()

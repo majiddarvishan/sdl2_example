@@ -1,15 +1,4 @@
-#include <math.h>
-
-//extern "C"
-//{
-//#include "helper.h"
-//}
-
 #include "playerControl.h"
-
-#ifdef main
-#undef main
-#endif
 
 int main()
 {
