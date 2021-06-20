@@ -144,7 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="helper.c" />
+    <ClCompile Include="helper.cpp" />
     <ClCompile Include="playerControl.cpp" />
   </ItemGroup>
   <ItemGroup>

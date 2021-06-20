@@ -1,10 +1,6 @@
 #pragma once
 
-extern "C"
-{
 #include "helper.h"
-}
-
 
 class playerControl
 {
@@ -23,8 +19,6 @@ private:
     void get_value();
 
 private:
-    SDL_Surface* temp_surface = NULL;
-
     SDL_Texture* bg = NULL;
     SDL_Rect 	bg_dst;
 
@@ -60,7 +54,7 @@ private:
     SDL_Window* Window = NULL;
     SDL_Renderer* Renderer = NULL;
 
-    int ww;
-    int wh;
+    int windowWidth;
+    int windowsHeight;
 };
 

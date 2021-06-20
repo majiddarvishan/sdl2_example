@@ -12,7 +12,7 @@ void playerControl::init()
 	assets_in();
 
 	SDL_SetWindowPosition(Window, 50, 50);
-	SDL_SetWindowSize(Window, ww, wh);
+	SDL_SetWindowSize(Window, windowWidth, windowsHeight);
 	SDL_SetWindowTitle(Window, "SDL2 Slider");
 	SDL_ShowWindow(Window);
 }
@@ -120,11 +120,11 @@ void playerControl::stop()
 void playerControl::assets_in()
 {
 	//BEGIN BG
-	temp_surface = IMG_Load("./assets/gfx/bg.png");
+	SDL_Surface* temp_surface = IMG_Load("./assets/gfx/bg.png");
 	bg = SDL_CreateTextureFromSurface(Renderer, temp_surface);
 	SDL_QueryTexture(bg, NULL, NULL, &bg_dst.w, &bg_dst.h);
-	ww = bg_dst.w;
-	wh = bg_dst.h;
+	windowWidth = bg_dst.w;
+	windowsHeight = bg_dst.h;
 	bg_dst.x = 0;
 	bg_dst.y = 0;
 	//END 	BG
@@ -134,7 +134,7 @@ void playerControl::assets_in()
 	button = SDL_CreateTextureFromSurface(Renderer, temp_surface);
 	SDL_QueryTexture(button, NULL, NULL, &button_dst.w, &button_dst.h);
 	button_dst.x = (120) - (button_dst.w / 2);
-	button_dst.y = (wh / 2) - (button_dst.h / 2);
+	button_dst.y = (windowsHeight / 2) - (button_dst.h / 2);
 	//END 	BUTTON
 
 	//BEGIN SLOT
@@ -142,7 +142,7 @@ void playerControl::assets_in()
 	slot = SDL_CreateTextureFromSurface(Renderer, temp_surface);
 	SDL_QueryTexture(slot, NULL, NULL, &slot_dst.w, &slot_dst.h);
 	slot_dst.x = (120) - (slot_dst.w / 2);
-	slot_dst.y = (wh / 2) - (slot_dst.h / 2);
+	slot_dst.y = (windowsHeight / 2) - (slot_dst.h / 2);
 	//END 	SLOT
 
 	//BEGIN FILLBAR
@@ -198,11 +198,11 @@ void playerControl::assets_out()
 void playerControl::render_value()
 {
 	sprintf_s(string, 4, "%d", value);
-	temp_surface = TTF_RenderText_Blended(font, string, color);
+	SDL_Surface* temp_surface = TTF_RenderText_Blended(font, string, color);
 	text = SDL_CreateTextureFromSurface(Renderer, temp_surface);
 	SDL_QueryTexture(text, NULL, NULL, &text_dst.w, &text_dst.h);
-	text_dst.x = (ww / 2) - (text_dst.w / 2);
-	text_dst.y = (wh / 2) - (text_dst.h / 2);
+	text_dst.x = (windowWidth / 2) - (text_dst.w / 2);
+	text_dst.y = (windowsHeight / 2) - (text_dst.h / 2);
 }
 
 void playerControl::get_value()

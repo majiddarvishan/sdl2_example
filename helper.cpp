@@ -1,8 +1,5 @@
 #include "helper.h"
 
-//SDL_Window   	*Window	  = NULL;
-//SDL_Renderer 	*Renderer = NULL;
-
 SDL_Window* createWindow()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
