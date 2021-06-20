@@ -1,5 +1,7 @@
 #include "playerControl.h"
 
+#include <string>
+
 #define WHITE 255,255,255,255
 #define BLACK 0,0,0,255
 #define RED   255,0,0,255
@@ -13,7 +15,7 @@ void playerControl::init()
 
 	SDL_SetWindowPosition(Window, 50, 50);
 	SDL_SetWindowSize(Window, windowWidth, windowsHeight);
-	SDL_SetWindowTitle(Window, "SDL2 Slider");
+	SDL_SetWindowTitle(Window, "SDL Player");
 	SDL_ShowWindow(Window);
 }
 
@@ -27,48 +29,65 @@ void playerControl::start()
 		SDL_GetMouseState(&mouse.x, &mouse.y);
 		while (SDL_PollEvent(&event))
 		{
-			if (event.type == SDL_QUIT) {
-				running = 0;
-			}
-			if (event.type == SDL_MOUSEMOTION) {
-				;
-			}
-			if (event.type == SDL_MOUSEBUTTONDOWN) {
-				if (event.button.button == SDL_BUTTON_RIGHT) {
-					;
-				}
-				if (event.button.button == SDL_BUTTON_MIDDLE) {
-					;
-				}
-				if (event.button.button == SDL_BUTTON_LEFT) {
-					if (event.button.button == SDL_BUTTON_LEFT && SDL_PointInRect(&mouse, &button_dst) && !mouse_follow) {
-						mouse_offset.y = mouse.y - button_dst.y;
-						mouse_follow = SDL_TRUE;
-					}
-				}
-			}
-			if (mouse_follow && event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+			switch (event.type)
 			{
-				mouse_follow = SDL_FALSE;
-			}
-			if (event.type == SDL_KEYDOWN)
-			{
-				switch (event.key.keysym.sym) {
-				case SDLK_ESCAPE:
+				case SDL_QUIT:
 					running = 0;
 					break;
 
-				case SDLK_r:
-				case SDLK_BACKSPACE:
-					break;
+				case SDL_MOUSEBUTTONDOWN:
+				{
+					/*if (event.button.button == SDL_BUTTON_RIGHT) {
+						;
+					}
+					if (event.button.button == SDL_BUTTON_MIDDLE) {
+						;
+					}*/
+					if (event.button.button == SDL_BUTTON_LEFT) 
+					{
+						if (SDL_PointInRect(&mouse, &button_dst) && !mouse_follow) 
+						{
+							mouse_offset.y = mouse.y - button_dst.y;
+							mouse_follow = SDL_TRUE;
+						}
+					}
 
-				case SDLK_p:
-				case SDLK_SPACE:
-					break;
-
-				default:
 					break;
 				}
+
+				case SDL_MOUSEBUTTONUP:
+					if (mouse_follow && event.button.button == SDL_BUTTON_LEFT)
+					{
+						mouse_follow = SDL_FALSE;
+					}
+					break;
+
+				case SDL_KEYDOWN:
+				{
+					switch (event.key.keysym.sym)
+					{
+					case SDLK_ESCAPE:
+						running = 0;
+						break;
+
+					case SDLK_r:
+					case SDLK_BACKSPACE:
+						break;
+
+					case SDLK_p:
+					case SDLK_SPACE:
+						break;
+
+					default:
+						break;
+					}
+
+					break;
+				}
+
+				case SDL_MOUSEMOTION:
+				default:
+					break;
 			}
 		}
 
@@ -95,6 +114,7 @@ void playerControl::start()
 			get_value();
 			render_value();
 		}
+
 		//BEGIN RENDERING
 		SDL_SetRenderDrawColor(Renderer, WHITE);
 		SDL_RenderClear(Renderer);
@@ -197,8 +217,9 @@ void playerControl::assets_out()
 
 void playerControl::render_value()
 {
-	sprintf_s(string, 4, "%d", value);
-	SDL_Surface* temp_surface = TTF_RenderText_Blended(font, string, color);
+	std::string str = std::to_string(value);
+
+	SDL_Surface* temp_surface = TTF_RenderText_Blended(font, str.c_str(), color);
 	text = SDL_CreateTextureFromSurface(Renderer, temp_surface);
 	SDL_QueryTexture(text, NULL, NULL, &text_dst.w, &text_dst.h);
 	text_dst.x = (windowWidth / 2) - (text_dst.w / 2);

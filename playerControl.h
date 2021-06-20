@@ -45,7 +45,7 @@ private:
     SDL_Rect 	text_dst;
 
     int value;
-    char string[4];
+    
 
     SDL_Point	mouse;
     SDL_bool 	mouse_follow = SDL_FALSE;
