@@ -18,12 +18,18 @@
     <ClInclude Include="helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="playerControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="helper.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="playerControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

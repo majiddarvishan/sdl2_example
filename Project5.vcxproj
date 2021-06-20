@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="helper.h" />
+    <ClInclude Include="playerControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="helper.c" />
+    <ClCompile Include="playerControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
